@@ -1,6 +1,7 @@
 import sys
 from DiceCombinations.Dices import Dices
 
-dice1 = Dices(1, 6, 3)
-dice1.print_array()
-print("END")
+dice = Dices(1, 4, 3)
+dice.print_array(None, dice.bigger_than(0, 9, dice.array_sum()))
+
+print("\nEND")
