@@ -1,3 +1,6 @@
+import sys
+
+
 class Dices:
 
     def __init__(self, default_value, max_on_dice, number_of_dices):
@@ -25,5 +28,22 @@ class Dices:
             default_array.append(self.default_value)
         while len(self.array) < max_combinations:
             self.array.append(default_array.copy())
-            default_array = self.increment_array(default_array, 1)
+            default_array = self.increment_array(default_array)
         return self.array
+
+    def print_array(self):
+        i = 0
+        while i < len(self.array):
+            tmp = self.array[i]
+            if (tmp[len(tmp) - 1]) == self.default_value:
+                sys.stdout.write('|')
+                sys.stdout.write('\n')
+            sys.stdout.write('|')
+            o = 0
+            while o < len(tmp):
+                sys.stdout.write(str(tmp[o]))
+                if o != len(tmp) - 1:
+                    sys.stdout.write(',')
+                o += 1
+            i += 1
+        sys.stdout.write('|')
