@@ -8,6 +8,7 @@ class Dices:
         self.default_value = default_value
         self.max_on_dice = max_on_dice
         self.number_of_dices = number_of_dices
+        self.generate_full_combinations()
 
     def increment_array(self, my_list, element=None):
         if element is None:
