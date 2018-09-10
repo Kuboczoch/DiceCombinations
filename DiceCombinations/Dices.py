@@ -10,7 +10,11 @@ class Dices:
         self.number_of_dices = number_of_dices
         self.generate_full_combinations()
 
-    def increment_array(self, my_list, element=None):
+    def increment_array(self, my_list: list, element: int = None) -> list:
+        """
+        :param my_list: array[array] [[1, 1] , [1, 1]]
+        :param element: array[element from where to increment]
+        """
         if element is None:
             element = len(my_list) - 1
         if (my_list[element] + 1) > self.max_on_dice:
@@ -22,7 +26,7 @@ class Dices:
             my_list[element] += 1
         return my_list
 
-    def generate_full_combinations(self):
+    def generate_full_combinations(self) -> list:
         max_combinations = self.max_on_dice ** self.number_of_dices
         default_array = []
         while len(default_array) < self.number_of_dices:
@@ -30,51 +34,59 @@ class Dices:
         while len(self.array) < max_combinations:
             self.array.append(default_array.copy())
             default_array = self.increment_array(default_array)
-        return self.array
+        return self.array  # Return array multiple values in array
 
-    def print_array(self, array=None, display_only_if=None):
+    def print_array(self, array: list = None, only_if: list = None):
+        """
+        :param only_if: list of bools [[True], [False]]
+        :param array: list of values [[1, 2], [2, 1]]
+        """
         if array is None:
             array = self.array
-        if display_only_if is None:
+        if only_if is None:
             i = 0
-            display_only_if = []
+            only_if = []
             while i < len(array):
-                display_only_if.append([True])
+                only_if.append([True])
                 i += 1
         i = 0
         inline = 0
         while i < len(array):
             if inline % self.max_on_dice == 0 and inline != 0:
-                if display_only_if[i - 1][0] is True:
+                if only_if[i - 1][0] is True:
                     sys.stdout.write('|')
                     sys.stdout.write('\n')
-            if display_only_if[i][0] is True:
+            if only_if[i][0] is True:
                 sys.stdout.write('|')
             o = 0
             while o < len(array[i]):
-                if display_only_if[i][0] is True:
+                if only_if[i][0] is True:
                     sys.stdout.write(str(array[i][o]))
                     inline += 1
                 if o != len(array[i]) - 1:
-                    if display_only_if[i][0] is True:
+                    if only_if[i][0] is True:
                         sys.stdout.write(',')
                 o += 1
             i += 1
-        if display_only_if[len(display_only_if) - 1][0] is True:
+        if only_if[len(only_if) - 1][0] is True:
             sys.stdout.write('|')
 
-    def equal_to(self, element, equal_to):
+    #  Operations on array
+
+    def equal_to(self, element: int, equal_to: int, array: list = None) -> list:
+        if array is None:
+            array = self.array
         my_array = []
         i = 0
-        while i < len(self.array):
-            if self.array[i][element] == equal_to:
+        while i < len(array):
+            if array[i][element] == equal_to:
                 my_array.append([True])
             else:
                 my_array.append([False])
             i += 1
-        return my_array
+        return my_array  # Return array bool values in array
 
-    def bigger_than(self, element, bigger_than, array=None):
+    def bigger_than(self, element: int, bigger_than: int, array: list=None) -> list:
         if array is None:
             array = self.array
         my_array = []
@@ -85,7 +97,7 @@ class Dices:
             else:
                 my_array.append([False])
             i += 1
-        return my_array
+        return my_array  # Return array bool values in array
 
     def array_sum(self):
         my_array = []
@@ -98,4 +110,4 @@ class Dices:
                 o += 1
             my_array.append(amount.copy())
             i += 1
-        return my_array
+        return my_array  # Return array values in array [[3], [5]]
