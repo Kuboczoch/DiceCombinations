@@ -37,6 +37,8 @@ class Dices:
         return self.array  # Return array multiple values in array
 
     def print_array(self, array: list = None, only_if: list = None):
+        #  only for debug and terminal view
+        #  use combine instead
         """
         :param only_if: list of bools [[True], [False]]
         :param array: list of values [[1, 2], [2, 1]]
@@ -71,43 +73,48 @@ class Dices:
         if only_if[len(only_if) - 1][0] is True:
             sys.stdout.write('|')
 
-    #  Operations on array
+    #  Operations on arrays
 
     def equal_to(self, element: int, equal_to: int, array: list = None) -> list:
         if array is None:
             array = self.array
         my_array = []
-        i = 0
-        while i < len(array):
-            if array[i][element] == equal_to:
+        for i in array:
+            if i[element] == equal_to:
                 my_array.append([True])
             else:
                 my_array.append([False])
-            i += 1
         return my_array  # Return array bool values in array
 
-    def bigger_than(self, element: int, bigger_than: int, array: list=None) -> list:
+    def bigger_than(self, element: int, bigger_than: int, array: list = None) -> list:
         if array is None:
             array = self.array
         my_array = []
-        i = 0
-        while i < len(array):
-            if array[i][element] > bigger_than:
+        for i in array:
+            if i[element] > bigger_than:
                 my_array.append([True])
             else:
                 my_array.append([False])
-            i += 1
         return my_array  # Return array bool values in array
 
-    def array_sum(self):
+    def smaller_than(self, element: int, smaller_than: int, array: list = None) -> list:
+        if array is None:
+            array = self.array
         my_array = []
-        i = 0
-        while i < len(self.array):
+        for i in array:
+            if i[element] < smaller_than:
+                my_array.append([True])
+            else:
+                my_array.append([False])
+        return my_array  # Return array bool values in array
+
+    def array_sum_values(self, array: list = None) -> list:
+        if array is None:
+            array = self.array
+        my_array = []
+        for i in array:
             amount = [0]
-            o = 0
-            while o < len(self.array[i]):
-                amount[0] += self.array[i][o]
-                o += 1
+            for o in i:
+                amount[0] += o
             my_array.append(amount.copy())
-            i += 1
         return my_array  # Return array values in array [[3], [5]]
