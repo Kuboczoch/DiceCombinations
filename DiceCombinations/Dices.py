@@ -73,6 +73,23 @@ class Dices:
         if only_if[len(only_if) - 1][0] is True:
             sys.stdout.write('|')
 
+    def combine_array(self, array: list = None, only_if: list = None) -> list:
+        if array is None:
+            array = self.array
+        if only_if is None:
+            i = 0
+            only_if = []
+            while i < len(array):
+                only_if.append([True])
+                i += 1
+        new_array = []
+        i = 0
+        while i < len(array):
+            if only_if[i][0]:
+                new_array.append(array[i].copy())
+            i += 1
+        return new_array
+
     #  Operations on arrays
 
     def equal_to(self, element: int, equal_to: int, array: list = None) -> list:
