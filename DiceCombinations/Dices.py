@@ -118,3 +118,29 @@ class Dices:
                 amount[0] += o
             my_array.append(amount.copy())
         return my_array  # Return array values in array [[3], [5]]
+
+    # Logic on arrays
+
+    @staticmethod
+    def array_or(array_bool1: list, array_bool2: list) -> list:
+        my_array = []
+        i = 0
+        while i < len(array_bool1):
+            if array_bool1[i][0] or array_bool2[i][0]:
+                my_array.append([True])
+            else:
+                my_array.append([False])
+            i += 1
+        return my_array
+
+    @staticmethod
+    def array_and(array_bool1: list, array_bool2: list) -> list:
+        my_array = []
+        i = 0
+        while i < len(array_bool1):
+            if array_bool1[i][0] and array_bool2[i][0]:
+                my_array.append([True])
+            else:
+                my_array.append([False])
+            i += 1
+        return my_array
