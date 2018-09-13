@@ -55,22 +55,23 @@ class Dices:
         inline = 0
         while i < len(array):
             if inline % self.max_on_dice == 0 and inline != 0:
-                if only_if[i - 1][0] is True:
-                    sys.stdout.write('|')
-                    sys.stdout.write('\n')
-            if only_if[i][0] is True:
+                inline = 0
+                sys.stdout.write('|')
+                sys.stdout.write('\n')
+            if only_if[i][0]:
                 sys.stdout.write('|')
             o = 0
             while o < len(array[i]):
-                if only_if[i][0] is True:
+                if only_if[i][0]:
                     sys.stdout.write(str(array[i][o]))
-                    inline += 1
+                    if o == 0:
+                        inline += 1
                 if o != len(array[i]) - 1:
-                    if only_if[i][0] is True:
+                    if only_if[i][0]:
                         sys.stdout.write(',')
                 o += 1
             i += 1
-        if only_if[len(only_if) - 1][0] is True:
+        if only_if[len(only_if) - 1][0]:
             sys.stdout.write('|')
 
     def combine_array(self, array: list = None, only_if: list = None) -> list:
