@@ -1,5 +1,4 @@
-import sys
-from DiceCombinations.Dices import Dices
+from Dices import Dices
 
 dice = Dices(1, 6, 3)
 print("\nUnitTest1\n")
