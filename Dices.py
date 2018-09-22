@@ -43,8 +43,7 @@ class Dices:
         :param only_if: list of bools [[True], [False]]
         :param array: list of values [[1, 2], [2, 1]]
         """
-        if array is None:
-            array = self.array
+        array = self.inherit_array_if_none(array)
         if only_if is None:
             i = 0
             only_if = []
@@ -75,7 +74,7 @@ class Dices:
             sys.stdout.write('|')
 
     def combine_array(self, array: list = None, only_if: list = None) -> list:
-        array = self.inherit_array(array)
+        array = self.inherit_array_if_none(array)
         if only_if is None:
             i = 0
             only_if = []
@@ -93,7 +92,7 @@ class Dices:
     #  Operations on arrays
 
     def equal_to(self, element: int, equal_to: int, array: list = None) -> list:
-        array = self.inherit_array(array)
+        array = self.inherit_array_if_none(array)
         my_array = []
         for i in array:
             if i[element] == equal_to:
@@ -103,8 +102,7 @@ class Dices:
         return my_array  # Return array bool values in array
 
     def bigger_than(self, element: int, bigger_than: int, array: list = None) -> list:
-        if array is None:
-            array = self.array
+        array = self.inherit_array_if_none(array)
         my_array = []
         for i in array:
             if i[element] > bigger_than:
@@ -114,7 +112,7 @@ class Dices:
         return my_array  # Return array bool values in array
 
     def smaller_than(self, element: int, smaller_than: int, array: list = None) -> list:
-        array = self.inherit_array(array)
+        array = self.inherit_array_if_none(array)
         my_array = []
         for i in array:
             if i[element] < smaller_than:
@@ -124,7 +122,7 @@ class Dices:
         return my_array  # Return array bool values in array
 
     def array_sum_values(self, array: list = None) -> list:
-        array = self.inherit_array(array)
+        array = self.inherit_array_if_none(array)
         my_array = []
         for i in array:
             amount = [0]
@@ -134,7 +132,7 @@ class Dices:
         return my_array  # Return array values in array [[3], [5]]
 
     def different_values(self, array: list = None) -> list:
-        array = self.inherit_array(array)
+        array = self.inherit_array_if_none(array)
         my_array = []
         for i in array:
             if i[0] != i[1]:
@@ -142,7 +140,7 @@ class Dices:
         return my_array
 
     def any_is(self, array: list = None, value: int = None) -> list:
-        array = self.inherit_array(array)
+        array = self.inherit_array_if_none(array)
         i = 0
         my_array = []
         while i < len(array):
@@ -183,7 +181,7 @@ class Dices:
 
     # For less redundancy
 
-    def inherit_array(self, array):
+    def inherit_array_if_none(self, array):
         if array is None:
             array = self.array
         return array
