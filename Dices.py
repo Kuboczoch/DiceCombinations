@@ -75,8 +75,7 @@ class Dices:
             sys.stdout.write('|')
 
     def combine_array(self, array: list = None, only_if: list = None) -> list:
-        if array is None:
-            array = self.array
+        array = self.inherit_array(array)
         if only_if is None:
             i = 0
             only_if = []
@@ -94,8 +93,7 @@ class Dices:
     #  Operations on arrays
 
     def equal_to(self, element: int, equal_to: int, array: list = None) -> list:
-        if array is None:
-            array = self.array
+        array = self.inherit_array(array)
         my_array = []
         for i in array:
             if i[element] == equal_to:
@@ -116,8 +114,7 @@ class Dices:
         return my_array  # Return array bool values in array
 
     def smaller_than(self, element: int, smaller_than: int, array: list = None) -> list:
-        if array is None:
-            array = self.array
+        array = self.inherit_array(array)
         my_array = []
         for i in array:
             if i[element] < smaller_than:
@@ -127,8 +124,7 @@ class Dices:
         return my_array  # Return array bool values in array
 
     def array_sum_values(self, array: list = None) -> list:
-        if array is None:
-            array = self.array
+        array = self.inherit_array(array)
         my_array = []
         for i in array:
             amount = [0]
@@ -138,8 +134,7 @@ class Dices:
         return my_array  # Return array values in array [[3], [5]]
 
     def different_values(self, array: list = None) -> list:
-        if array is None:
-            array = self.array
+        array = self.inherit_array(array)
         my_array = []
         for i in array:
             if i[0] != i[1]:
@@ -147,19 +142,16 @@ class Dices:
         return my_array
 
     def any_is(self, array: list = None, value: int = None) -> list:
-        if array is None:
-            array = self.array
+        array = self.inherit_array(array)
+        i = 0
         my_array = []
-        element = 0
-        for i in array:
-            element = 0
-            for o in i:
-                element += 1
-                if o == value:
-                    my_array.append([True])
-                    break
-                if len(i) == element:
-                    my_array.append([False])
+        while i < len(array):
+            my_array.append([False])
+            i += 1
+        i = 0
+        while i < len(array[0]):
+            my_array = self.array_or(my_array, self.equal_to(i, value, array))
+            i += 1
 
         return my_array  # Return array bool values in array
 
@@ -188,3 +180,10 @@ class Dices:
                 my_array.append([False])
             i += 1
         return my_array
+
+    # For less redundancy
+
+    def inherit_array(self, array):
+        if array is None:
+            array = self.array
+        return array
