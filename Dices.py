@@ -137,6 +137,32 @@ class Dices:
             my_array.append(amount.copy())
         return my_array  # Return array values in array [[3], [5]]
 
+    def different_values(self, array: list = None) -> list:
+        if array is None:
+            array = self.array
+        my_array = []
+        for i in array:
+            if i[0] != i[1]:
+                my_array.append(i.copy())
+        return my_array
+
+    def any_is(self, array: list = None, value: int = None) -> list:
+        if array is None:
+            array = self.array
+        my_array = []
+        element = 0
+        for i in array:
+            element = 0
+            for o in i:
+                element += 1
+                if o == value:
+                    my_array.append([True])
+                    break
+                if len(i) == element:
+                    my_array.append([False])
+
+        return my_array  # Return array bool values in array
+
     # Logic on arrays
 
     @staticmethod
