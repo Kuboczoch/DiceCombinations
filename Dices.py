@@ -45,11 +45,7 @@ class Dices:
         """
         array = self.inherit_array_if_none(array)
         if only_if is None:
-            i = 0
-            only_if = []
-            while i < len(array):
-                only_if.append([True])
-                i += 1
+            only_if = self.fill_array_with([True])
         i = 0
         inline = 0
         while i < len(array):
@@ -76,11 +72,7 @@ class Dices:
     def combine_array(self, array: list = None, only_if: list = None) -> list:
         array = self.inherit_array_if_none(array)
         if only_if is None:
-            i = 0
-            only_if = []
-            while i < len(array):
-                only_if.append([True])
-                i += 1
+            only_if = self.fill_array_with([True])
         new_array = []
         i = 0
         while i < len(array):
@@ -184,4 +176,12 @@ class Dices:
     def inherit_array_if_none(self, array):
         if array is None:
             array = self.array
+        return array
+
+    def fill_array_with(self, value):
+        array = []
+        i = 0
+        while i < len(self.array) - 1:
+            array.append(value.copy())
+            i += 1
         return array
